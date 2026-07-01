@@ -8,7 +8,7 @@ The project focuses on clean architecture, separation of responsibilities, and m
 
 ## Preview
 
-<!-- ![Gameplay](readme/winning_animation.gif) -->
+![Gameplay](readme/winning_animation.gif)
 
 ---
 
