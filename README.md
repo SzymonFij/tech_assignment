@@ -1,67 +1,136 @@
-# Game Developer Assignment: 5x3 Slot Machine
+# 🎰 Slot Machine – Tech Assignment
 
-## Objective
-Create a simple 5x3 slot machine game using TypeScript/JavaScript ES6 and Pixi.js. This assignment will test your
-ability to work with game development concepts, TypeScript/JavaScript, and the Pixi.js library.
+Implementation of a 5x3 slot machine created as a technical assignment using **TypeScript**, **PixiJS**, and **GSAP**.
 
-*Good luck with creating your slot machine game!*
+The project focuses on clean architecture, separation of responsibilities, and maintainable game logic.
 
-## Requirements
+---
 
-### Game Mechanics
-1. Implement a 5x3 grid of symbols.
-2. Use the provided symbol images for the slot machine.
-3. Implement a "Spin" button that randomizes the symbols on the grid.
-4. Implement win condition checking for 3+ OAKs (3+ consecutive symbols of the same kind).
-5. Game should not have fixed paylines, but use "ways-to-win" system (exact position of the symbols on each reel doesn't matter as long as they appear consecutively from left to right).
+## Preview
 
-**Example Winning Boards:**
+<!-- ![Gameplay](readme/winning_animation.gif) -->
 
-(Non-winning symbols are grayed out solely to enhance the visibility of winning symbols. This feature is not required for implementation in your game)
+---
 
-![board1.png](readme%2Fboard1.png)
-![board2.png](readme%2Fboard2.png)
+## Features
 
-### Visual Requirements
-1. Use Pixi.js to render the game.
-2. Create a basic, visually appealing layout for the slot machine.
-3. Implement a spinning reels visualization during the spin action.
-4. Implement a simple win animation (e.g., a "bump" or highlight effect on winning symbols).
+- 5x3 slot machine layout
+- Animated reel spinning
+- Configurable paylines / ways-to-win evaluation
+- Win detection and presentation
+- Symbol highlighting animations
+- State-machine driven game flow
+- Separation between game logic and presentation
+- Object-oriented architecture
 
-### Technical Requirements
-1. Use TypeScript or JavaScript ES6 for all game logic.
-2. Use Pixi.js for rendering and animations.
-3. Implement a basic state management system (e.g., idle, spinning, win checking).
-4. Ensure the code is well-organized, following object-oriented programming principles.
-6. Feel free to install any dependency you might find useful.
-7. Feel free to modify any of boilerplate/template files if needed (files on root).
-8. During machine spinning, display random symbols on the reels. 
-9. Use the provided Outcome.ts class to determine the symbols to be displayed after the machine stops. 
+---
 
-## Build & Development
+## Technologies
 
-You will need node setup on your machine.
+- **TypeScript**
+- **PixiJS**
+- **GSAP**
+- **Parcel**
 
-Then you can run the commands below in order to start the client:
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/SzymonFij/tech_assignment.git
+cd tech_assignment
+```
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Run development server:
+
+```bash
 npm run serve
 ```
 
-That will build the game and start a client at http://localhost:8080/. The server has hot reload, so every time you 
-update the code, it should rebuild the client and refresh the tab in your preferred web browser.
+Build production version:
 
-## Evaluation Criteria
-- Code quality, organization, and readability
-- Effective use of TypeScript/JavaScript ES6 and Pixi.js
-- Correct implementation of required game mechanics
-- Quality of spinning reels visualization and win animation
-- Overall user experience and game feel
+```bash
+npm run build
+```
 
-## Submission
-Please submit your code as a GitHub repository link or a zip package via email to natalia.c@naileditgames.com.
+---
 
-## Disclaimer
+## Project Structure
 
-This is a test assignment and no part of your work will be used for purposes other than recruitment
+```
+src/
+├── config.ts              # Game configuration
+├── types.ts               # Shared type definitions
+├── Machine.ts             # Main game controller
+├── Reel.ts                # Reel implementation
+├── SlotSymbol.ts          # Symbol representation
+├── SpinButton.ts          # UI spin button
+├── InputController.ts     # Input handling
+├── GameStateMachine.ts    # Game flow state machine
+├── WinChecker.ts          # Win calculation logic
+├── WinPresenter.ts        # Win animations/presentation
+├── WinOdometer.ts         # Win counter animation
+├── Outcome.ts             # Spin result definitions
+└── Paytable.ts            # Paytable mockup configuration
+```
+
+---
+
+## Architecture
+
+The codebase is organized into independent components, each responsible for a single aspect of the application's behavior.
+
+### Machine
+
+Acts as the main coordinator of the game. It controls the reels, handles game flow, and communicates with other systems.
+
+### GameStateMachine
+
+Controls the slot lifecycle:
+
+```
+Idle
+ ↓
+Spinning
+ ↓
+Stopping
+ ↓
+Win
+ ↓
+Idle
+```
+
+### Reel
+
+Responsible only for reel animation and symbol management.
+
+### WinChecker
+
+Contains all game logic related to preparing winning combinations.
+
+### WinPresenter
+
+Handles the visual presentation of wins independently from the game logic.
+
+### InputController
+
+Processes player interactions and forwards them to the game controller.
+
+---
+
+## Assumptions
+
+- Winning combinations are evaluated from left to right.
+- Symbols must appear consecutively to create a valid combination.
+- Multiple winning combinations can occur during a single spin.
+- Reel animations are independent of win evaluation.
+
+---

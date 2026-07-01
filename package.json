@@ -4,6 +4,7 @@
   "description": "Nailed It! Games Tech assignment",
   "scripts": {
     "serve": "parcel index.html --port=8080",
+    "build": "parcel build index.html",
     "typecheck": "tsc"
   },
   "author": "",
